@@ -3,12 +3,14 @@ package com.sarvesh.ecommerceapp;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.PersistableBundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listView = (ListView) findViewById(R.id.listView);
         imageView = (ImageView) findViewById(R.id.imageView);
         editText= (EditText) findViewById(R.id.editText);
+        listView = (ListView) findViewById(R.id.listView);
 
         //savedInstanceState is null mean activity is running for the first time
         if (savedInstanceState == null) {
@@ -45,9 +47,17 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(unDestructedFragment, "MyFragment").commit();
         } else {
             unDestructedFragment = (UnDestructedFragment) getSupportFragmentManager().findFragmentByTag("MyFragment");
+            initializeListView(arrayList,bitmaps);
         }
 
 
+    }
+
+
+    //If screen get rotated we gonna again get the array and bitmap from the asyncttask class
+    public void updateArrayList(ArrayList<HashMap<String, String>> arrayList,ArrayList<Bitmap> bitmaps){
+        this.arrayList = arrayList;
+        this.bitmaps=bitmaps;
     }
 
     //Onclick listener for search button

@@ -45,6 +45,9 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
 
     public void onAttach(Context context) {
         this.activity = (Activity) context;
+       if(list!=null && bitmaps!=null){
+           ((MainActivity)activity).updateArrayList(list,bitmaps);
+       }
     }
 
     public void onDetach() {
@@ -183,11 +186,12 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        if(executeSuccesfully){
-            ((MainActivity) activity).initializeListView(list, bitmaps);
-        }else {
-            ((MainActivity) activity).showToast();
-        }
-
+       if(activity!=null){
+           if(executeSuccesfully ){
+               ((MainActivity) activity).initializeListView(list, bitmaps);
+           }else {
+               ((MainActivity) activity).showToast();
+           }
+       }
     }
 }
