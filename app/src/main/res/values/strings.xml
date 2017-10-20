@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">EcommerceApp</string>
+   
+    <string-array name="list_items">
+        <item>Image 1</item>
+        <item>Image 2</item>
+        <item>Image 3</item>
+        <item>Image 4</item>
+        <item>Image 5</item>
+    </string-array>
+    <string-array name="links">
+        <item>https://upload.wikimedia.org/wikipedia/commons/e/e6/Clocktower_Panorama_20080622_20mb.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/f/ff/Pizigani_1367_Chart_10MB.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/2/2d/Snake_River_%285mb%29.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/b/b3/Elakala_Waterfalls_Swirling_Pool_Mossy_Rocks.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/en/c/c7/Tiki-100_Rev_C_Computer_with_10MB_Harddisk.JPG</item>
+    </string-array>
+</resources>
