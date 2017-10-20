@@ -33,6 +33,10 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
     private static final String ENDPOINT = "webservices.amazon.in";
     ArrayList<HashMap<String, String>> list;
     ArrayList<Bitmap> bitmaps;
+    HttpURLConnection httpURLConnection;;
+    InputStream inputStream;
+    Boolean executeSuccesfully = false;
+
 
     MyAsyncTask(Activity activity, String searchText) {
         this.activity = activity;
@@ -72,16 +76,35 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
             e.printStackTrace();
         }
 
+
+
         try {
             URL url = new URL(requestUrl);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("GET");
-            InputStream inputStream = httpURLConnection.getInputStream();
+            inputStream = httpURLConnection.getInputStream();
             processXml(inputStream);
-
+            executeSuccesfully=true;
         } catch (Exception e) {
             e.printStackTrace();
+            executeSuccesfully=false;
+
         }
+
+        //Close the connection
+        finally {
+           if(httpURLConnection!=null){
+               httpURLConnection.disconnect();
+           }
+          if(inputStream!=null){
+              try {
+                  inputStream.close();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+          }
+        }
+
         return null;
     }
 
@@ -160,6 +183,11 @@ public class MyAsyncTask extends AsyncTask<String, Integer, Boolean> {
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        ((MainActivity) activity).initializeListView(list, bitmaps);
+        if(executeSuccesfully){
+            ((MainActivity) activity).initializeListView(list, bitmaps);
+        }else {
+            ((MainActivity) activity).showToast();
+        }
+
     }
 }

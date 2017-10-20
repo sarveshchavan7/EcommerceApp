@@ -23,7 +23,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:background="@color/grey"
     android:text="Loading will depend on your internet speed"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="List view will apper below"/>
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="5dp"></View>
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

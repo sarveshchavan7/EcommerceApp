@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -64,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
         this.bitmaps=bitmaps;
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.listview_items, R.id.title, arrayList);
         listView.setAdapter(customAdapter);
+    }
+
+    public void showToast() {
+        Toast.makeText(this,"Exception occurred please try diff keyword \nOR Request at slower rate",Toast.LENGTH_LONG).show();
     }
 
 
