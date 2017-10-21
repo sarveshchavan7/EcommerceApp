@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.imageView);
-        editText= (EditText) findViewById(R.id.editText);
+        editText = (EditText) findViewById(R.id.editText);
         listView = (ListView) findViewById(R.id.listView);
 
         //savedInstanceState is null mean activity is running for the first time
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(unDestructedFragment, "MyFragment").commit();
         } else {
             unDestructedFragment = (UnDestructedFragment) getSupportFragmentManager().findFragmentByTag("MyFragment");
-            if(bitmaps!=null && arrayList!=null){
-                initializeListView(arrayList,bitmaps);
-            }
+
+            initializeListView(arrayList, bitmaps);
+
 
         }
 
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     //If screen get rotated we gonna again get the array and bitmap from the asyncttask class
-    public void updateArrayList(ArrayList<HashMap<String, String>> arrayList,ArrayList<Bitmap> bitmaps){
+    public void updateArrayList(ArrayList<HashMap<String, String>> arrayList, ArrayList<Bitmap> bitmaps) {
         this.arrayList = arrayList;
-        this.bitmaps=bitmaps;
+        this.bitmaps = bitmaps;
     }
 
     //Onclick listener for search button
@@ -74,15 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
     //This method will be called from our asynctask's onPostExecute() method
     //once we finish our background process
-    public void initializeListView(ArrayList<HashMap<String, String>> arrayList,ArrayList<Bitmap> bitmaps) {
+    public void initializeListView(ArrayList<HashMap<String, String>> arrayList, ArrayList<Bitmap> bitmaps) {
         this.arrayList = arrayList;
-        this.bitmaps=bitmaps;
+        this.bitmaps = bitmaps;
         CustomAdapter customAdapter = new CustomAdapter(this, R.layout.listview_items, R.id.title, arrayList);
-        listView.setAdapter(customAdapter);
+        if (this.arrayList != null && this.bitmaps != null) {
+            listView.setAdapter(customAdapter);
+        }
     }
 
     public void showToast() {
-        Toast.makeText(this,"Exception occurred please try diff keyword \nOR Request at slower rate",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Exception occurred please try diff keyword \nOR Request at slower rate", Toast.LENGTH_LONG).show();
     }
 
 
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = v.findViewById(R.id.imageView);
 
             //our arrayList is of type hashmap which holds the value for eash keys that are Title,FormattedPrice and URL
-            if(arrayList!=null && arrayList.get(position)!=null){
+            if (arrayList != null && arrayList.get(position) != null) {
                 title.setText(arrayList.get(position).get("Title"));
                 amount.setText(arrayList.get(position).get("FormattedPrice"));
             }
@@ -114,9 +116,9 @@ public class MainActivity extends AppCompatActivity {
             //bitmaps is an arrayList of type bitmap which hold all the images which are downloaded
             //from the url since we can't do download here on the main thread i have done that in
             //async task itself
-            if(bitmaps!=null && bitmaps.get(position)!=null){
+            if (bitmaps != null && bitmaps.get(position) != null) {
                 imageView.setImageBitmap(bitmaps.get(position));
-            }else{
+            } else {
                 imageView.setImageResource(R.drawable.no_image_available);
             }
 
