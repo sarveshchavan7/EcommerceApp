@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(unDestructedFragment, "MyFragment").commit();
         } else {
             unDestructedFragment = (UnDestructedFragment) getSupportFragmentManager().findFragmentByTag("MyFragment");
-            initializeListView(arrayList,bitmaps);
+            if(bitmaps!=null && arrayList!=null){
+                initializeListView(arrayList,bitmaps);
+            }
+
         }
 
 
